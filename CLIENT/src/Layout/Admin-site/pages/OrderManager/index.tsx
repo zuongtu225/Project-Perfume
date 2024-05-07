@@ -19,7 +19,6 @@ const OrderManager = () => {
   const [code, setCodeOrder] = useState<number>();
   const orderApi = useSelector((state: any) => state?.orderReducer?.orders);
   const [data, setData] = useState<IUser[]>();
-  console.log(orderApi);
 
   const handlePage = (pagination: any) => {
     setData(pagination);

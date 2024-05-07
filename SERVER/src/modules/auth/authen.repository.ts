@@ -14,13 +14,11 @@ export class AuthenRepository {
     private authenRepository: Repository<User>,
     private jwtService: JwtService,
   ) {}
-
   async register(body: IUser): Promise<User> {
     return await this.authenRepository.save(body);
   }
 
   async login(body: LoginDto): Promise<IResponseAuth> {
-    console.log(body, '<<');
     const user = await this.authenRepository.findOne({
       where: { email: body.email },
       relations: ['role'],

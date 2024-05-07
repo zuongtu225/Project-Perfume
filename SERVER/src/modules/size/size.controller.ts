@@ -41,7 +41,6 @@ export class SizeController {
 
   @Get('/:id')
   async getDetailSize(@Param('id') id: number): Promise<ISize | IResponse> {
-    console.log(id);
     return await this.sizeService.getDetailSize(id);
   }
 

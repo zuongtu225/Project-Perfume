@@ -24,7 +24,6 @@ export class ProductSizeRepository {
     });
   }
   async updateProductSize(id: number, productSize: IProductSize): Promise<any> {
-    console.log(id, productSize);
     return await this.productSizeRepository.update(id, productSize);
   }
   async delete(id: IProduct): Promise<any> {

@@ -80,8 +80,6 @@ const FemaleProducts = () => {
             </div>
             <div className="product-content-main">
               {data?.map((item: IProduct) => {
-                console.log(item);
-
                 return (
                   <div className="product">
                     <div className="product">

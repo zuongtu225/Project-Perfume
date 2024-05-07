@@ -25,7 +25,6 @@ const HistoryOrders = () => {
   const historyOrders = useSelector(
     (state: any) => state?.orderReducer?.historyOrderByUser
   );
-  console.log(historyOrders);
 
   const updateOrder = async (id: number) => {
     const orderNeedChange = historyOrders?.find((item: any) => item.id === id);

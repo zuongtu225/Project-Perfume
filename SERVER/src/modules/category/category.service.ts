@@ -52,7 +52,6 @@ export class CategoryService {
   }
   async deleteCategoryService(id: number): Promise<IResponse> {
     const response = await this.categoryRepository.deleteCategory(id);
-    console.log(response);
     if (response.affected == 1) {
       return {
         data: null,

@@ -50,7 +50,6 @@ export function AddModal(props: any): any {
   const [openLoading, setOpenLoading] = useState<boolean>(false);
 
   const ClickClose = (e: any) => {
-    console.log(1111, e);
     if (e) {
       props.handleClose(false);
     }
