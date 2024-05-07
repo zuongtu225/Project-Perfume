@@ -7,7 +7,7 @@ import {
   getApiRoles,
   getDetailRole,
 } from "../../../../store/action";
-import { IBrand, IRole } from "../../../../Interface";
+import { IRole } from "../../../../Interface";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { EditModal } from "../../components/modal/EditModal";
 import { Button } from "flowbite-react";

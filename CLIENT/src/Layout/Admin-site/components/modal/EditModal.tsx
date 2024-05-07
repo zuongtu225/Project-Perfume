@@ -9,7 +9,6 @@ import EditProductForm from "./FormEdit/EditProductForm";
 import {
   IBrand,
   ICategory,
-  IPayment,
   IProduct,
   IRole,
   ISize,
@@ -23,8 +22,8 @@ import {
   getApiRoles,
   getApiSizes,
 } from "../../../../store/action";
-import { createProductSize, updateProduct } from "../../../../Api";
-import { ToastContainer, toast } from "react-toastify";
+import { updateProduct } from "../../../../Api";
+import { toast } from "react-toastify";
 import EditBrandForm from "./FormEdit/EditBrandForm";
 import { updateBrand } from "../../../../Api/brands";
 import EditCategoryForm from "./FormEdit/EditCategoryForm";

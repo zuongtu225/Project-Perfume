@@ -29,6 +29,7 @@ function App() {
       {/* auth */}
       <Route path="/auth/login" element={<Login />}></Route>
       <Route path="/auth/register" element={<Register />}></Route>
+      <Route path="/verifyGoogle/:token/v1" element={<VerifyLogin />} />
       <Route path="/profile" element={<Profile />}></Route>
       {/* customer */}
       <Route path="/" element={<CustomerExtend />}>

@@ -14,6 +14,7 @@ import { OrderItemModule } from './modules/orderItem/orderItem.module';
 import { OrderModule } from './modules/order/order.module';
 import { AddressModule } from './modules/address/address.module';
 import { PaymentModule } from './modules/payment/payment.module';
+import { GoogleStrategyModule } from './shared/utils/auth-google/auth-google.module';
 import { SocketGateway } from './socket';
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { SocketGateway } from './socket';
     OrderModule,
     AddressModule,
     PaymentModule,
+    GoogleStrategyModule,
     SocketGateway,
   ],
 })

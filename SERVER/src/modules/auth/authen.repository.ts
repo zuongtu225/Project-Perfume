@@ -20,6 +20,7 @@ export class AuthenRepository {
   }
 
   async login(body: LoginDto): Promise<IResponseAuth> {
+    console.log(body, '<<');
     const user = await this.authenRepository.findOne({
       where: { email: body.email },
       relations: ['role'],
@@ -45,6 +46,34 @@ export class AuthenRepository {
       accessToken: token,
       success: true,
       data: user,
+    };
+  }
+
+  async loginGoogleRepository(user: any): Promise<IResponseAuth> {
+    const existingUser = await this.authenRepository.findOne({
+      where: { email: user.email },
+    });
+    if (!existingUser) {
+      return {
+        accessToken: null,
+        success: false,
+        data: null,
+      };
+    }
+    const dataGenerateToken = {
+      firstName: existingUser.firstName,
+      lastName: existingUser.lastName,
+      email: existingUser.email,
+      avatar: existingUser.avatar,
+      status: existingUser.status,
+      password: 'defaultgooglepassword',
+      role: existingUser.role,
+    };
+    const token = await this.jwtService.signAsync(dataGenerateToken);
+    return {
+      success: true,
+      accessToken: token,
+      data: dataGenerateToken,
     };
   }
 }

@@ -7,7 +7,7 @@ import {
 } from "../../../../store/action";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { updateOrderApi } from "../../../../Api/order";
 import { OrderDetailModal } from "./orderDetailForm";
 import { IUser } from "../../../../Interface";
@@ -110,7 +110,6 @@ const OrderManager = () => {
   return (
     <div>
       <AdminHeader title={"order"} slug={"ORDERS"} />
-      <ToastContainer />
       <div className="content orders">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
