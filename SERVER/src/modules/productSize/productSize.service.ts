@@ -29,7 +29,7 @@ export class ProductSizeService {
       return {
         success: true,
         message: 'Tạo ProductSize thành công',
-        data: '',
+        data: response,
       };
     }
     throw new BadRequestException('Tạo ProductSize thất bại');
@@ -54,7 +54,6 @@ export class ProductSizeService {
     let response: IProductSizeUpdate;
     if (Array.isArray(body)) {
       for (const item of body) {
-        // [id: size stock proId]
         const idCurrent = item.id; // id ProductSize
         const productSize: IProductSize = {
           productId: item.productId,

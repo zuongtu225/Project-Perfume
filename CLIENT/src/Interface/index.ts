@@ -65,10 +65,23 @@ export interface IProductSize {
   stock: number;
   sizeId: number;
 }
+export interface IResProductSize {
+  data: IProductSizeUpdate;
+  success: boolean;
+  message: string;
+}
+
 export interface IProductSizeUpdate {
   id: number;
   productId: number;
   sizeId: number;
+  stock: number;
+}
+export interface ICheckProductSize {
+  id: number;
+  productId: IProduct;
+  sizeId: ISize;
+  status?: boolean;
   stock: number;
 }
 export interface INewProductSize {

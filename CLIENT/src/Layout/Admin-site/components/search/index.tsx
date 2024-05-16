@@ -50,3 +50,7 @@ const SearchComponent: React.FC<Search> = (props) => {
 };
 
 export default SearchComponent;
+
+// 1. khi Client tìm sản phẩm thì dữ liệu tìm kiếm sẽ đc gửi qua param trong request
+// 2. Server sẽ nhận dữ liệu và tìm kiếm sản phẩm trong DB thông qua TypeORM
+// 3. sau đấy trả về dữ liệu cho Client

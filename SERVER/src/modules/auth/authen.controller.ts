@@ -43,7 +43,12 @@ export class AuthenController {
     const response = await this.authenService.loginGoogleService(req);
     if (response && response.accessToken) {
       const token = response.accessToken;
-      return res.redirect(`http://localhost:3000/verifyGoogle/${token}/v1`);
+      const resss = res.redirect(
+        `http://localhost:3000/verifyGoogle/${token}/v1`,
+      );
+      console.log(resss);
+
+      return resss;
     }
   }
 }

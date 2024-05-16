@@ -3,29 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   IBrand,
   ICategory,
+  ICheckProductSize,
   INewProductSize,
+  IProductSize,
+  IResProductSize,
   ISize,
 } from "../../../../../Interface";
 import { AppDispatch } from "../../../../../store";
 import {
   getApiBrands,
   getApiCategories,
+  getApiProductSizes,
   getApiSizes,
   getDetailProduct,
 } from "../../../../../store/action";
 import { updateImage } from "../../../../../Api/images";
+import {
+  createProductSize,
+  deleteProductSizes,
+  updateProductSize,
+} from "../../../../../Api";
 
 const EditProductForm = (props: any) => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isErrorStock, setError] = useState<boolean>(false);
   const productDetail = useSelector(
     (state: any) => state?.productReducer?.productDetail
   );
+  console.log(productDetail, "detail");
+
   const categories = useSelector(
     (state: any) => state?.categoryReducer?.categories
   );
   const [listProductSize, setListProductSize] = useState<INewProductSize[]>(
     productDetail?.productSizes
   );
+  const [newProductSize, setNewProductSize] =
+    useState<INewProductSize[]>(listProductSize);
   const brands = useSelector((state: any) => state?.brandReducer?.brands);
   const sizes = useSelector((state: any) => state?.sizeReducer?.sizes);
   const [newProduct, setNewProduct] = useState<any>({
@@ -56,15 +70,82 @@ const EditProductForm = (props: any) => {
     setNewProduct(product);
   };
 
+  //  lấy stock từng size
+  // update size nhưng stock vẫn giữ nguyên
+  // cập nhật lun stock ở DB
+  const getValue = async (e: any, sizeId: number) => {
+    const isBigger = +e.target.value;
+    let stock: number;
+    let status: boolean;
+    if (!isBigger) {
+      stock = e.target.value.slice(0);
+      status = true;
+      setError(true);
+    } else {
+      stock = +e.target.value;
+      status = false;
+      setError(false);
+    }
+    const updated = listProductSize?.map((item: ICheckProductSize) => {
+      if (item.sizeId.id === sizeId) {
+        return { ...item, stock: stock, status: status };
+      }
+      return item;
+    });
+    setListProductSize(updated);
+    if (stock) {
+      const newProductSizes = updated.map((item: ICheckProductSize) => {
+        delete item["status"];
+        return item;
+      });
+      setNewProductSize(newProductSizes);
+      await updateProductSize(newProductSizes);
+      await dispatch(getDetailProduct(productDetail.id));
+    }
+  };
+
+  // để add and delete size
+  const handleChangeSize = async (sizeId: any) => {
+    const isExistProductClick = listProductSize?.find(
+      (item: INewProductSize) => item?.sizeId?.id == sizeId
+    );
+    if (isExistProductClick) {
+      setListProductSize((currentValue: any) => {
+        if (isExistProductClick) {
+          return currentValue.filter(
+            (item: INewProductSize) => item.sizeId.id !== sizeId
+          );
+        }
+      });
+      await deleteProductSizes(isExistProductClick.id);
+      await dispatch(getDetailProduct(productDetail.id));
+    } else {
+      let newProductSize = [
+        {
+          productId: productDetail.id,
+          sizeId: sizeId,
+          stock: 0,
+        },
+      ];
+      await createProductSize(newProductSize);
+      await dispatch(getDetailProduct(productDetail.id));
+    }
+  };
+
   useEffect(() => {
     dispatch(getApiCategories(null));
     dispatch(getApiBrands(null));
     dispatch(getApiSizes());
+    dispatch(getDetailProduct(productDetail.id));
   }, []);
 
   useEffect(() => {
-    props.handleGetData(newProduct, listProductSize);
-  }, [newProduct, listProductSize]);
+    setListProductSize(productDetail?.productSizes);
+  }, [productDetail]);
+
+  useEffect(() => {
+    props.handleGetData(newProduct, isErrorStock);
+  }, [newProduct, isErrorStock]);
 
   return (
     <div>
@@ -113,31 +194,43 @@ const EditProductForm = (props: any) => {
               onChange={handleChange}
             />
           </div>
-          <div className="md:w-[50%] px-3 ">
-            <div className="relative ">
+          <div className="md:w-[50%] px-3 relative">
+            <div>
               <label>Dung tích:</label>
               {sizes?.map((item: ISize) => {
-                const size = item.size.slice(14);
+                const size = item?.size.slice(14);
                 return (
-                  <div key={item.id} className=" flex items-center">
-                    <label className="block">{size}</label>
+                  <div key={item?.id} className=" flex items-center">
+                    <label className="block text-sm">{size}</label>
                     <input
                       type="checkbox"
-                      className="w-50 h-50 cursor-pointer ml-4 mr-2"
+                      className="w-50 h-50 cursor-pointer ml-4 mr-2 "
+                      onChange={() => handleChangeSize(item?.id)}
                       checked={listProductSize?.some(
-                        (element: INewProductSize) =>
-                          element.sizeId.id == item.id
+                        (element: ICheckProductSize) =>
+                          element?.sizeId?.id == item?.id
                       )}
                     />
-                    <label className="block mr-2"> Số lượng:</label>
-                    {listProductSize.map((element: INewProductSize) => {
-                      if (element.sizeId.id === item.id) {
+                    <label className="block mr-2 text-sm"> Số lượng:</label>
+                    {listProductSize?.map((element: ICheckProductSize) => {
+                      if (element?.sizeId?.id === item?.id) {
                         return (
-                          <input
-                            type="number"
-                            value={element.stock}
-                            className="w-[70px] h-[20px]"
-                          />
+                          <div key={item?.id}>
+                            <input
+                              key={item.id}
+                              type="number"
+                              value={element?.stock}
+                              className="w-[90px] h-[20px]"
+                              onChange={(e) => getValue(e, item?.id)}
+                            />
+                            {element?.status ? (
+                              <p className="absolute bottom-[10px] left-0   text-sm text-red-300">
+                                ------ Vui lòng không để số lượng trống ------
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                          </div>
                         );
                       }
                     })}

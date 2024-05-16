@@ -1,4 +1,4 @@
-import { IProduct, IProductSize } from "../Interface";
+import { INewProductSize, IProduct, IProductSize } from "../Interface";
 import BaseAxios from "./requsetToken";
 
 export const createProduct = (newProduct: IProduct) => {
@@ -35,6 +35,15 @@ export const updateStatusProduct = (status: boolean, id: number) => {
   return BaseAxios.put(`http://localhost:9000/api/v1/products/${id}`, {
     status,
   })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.error("Error!!!!", error);
+    });
+};
+export const updateProductSize = (data: INewProductSize[]) => {
+  return BaseAxios.put(`http://localhost:9000/api/v1/productSizes`, data)
     .then((response) => {
       return response;
     })

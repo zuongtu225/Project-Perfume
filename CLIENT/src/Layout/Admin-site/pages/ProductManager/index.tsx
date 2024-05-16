@@ -52,12 +52,6 @@ const ProductManager = () => {
                   Thương Hiệu
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Số lượng
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Giá
-                </th>
-                <th scope="col" className="px-6 py-3">
                   Action
                 </th>
               </tr>
@@ -68,7 +62,7 @@ const ProductManager = () => {
                   <tr key={index} className="p-10 zitems-center">
                     <td
                       scope="row"
-                      className="pl-10 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="pl-[3%] py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       <img
                         className="w-20 h-20  object-cover "
@@ -77,12 +71,8 @@ const ProductManager = () => {
                       />
                     </td>
                     <td className="px-1 py-2 font-bold">{item.title}</td>
-                    <td className="px-1 py-2">{item.brand?.title}</td>
-                    <td className="px-1 py-2"> </td>
-                    <td className="px-1 py-2">
-                      {item.price?.toLocaleString()}
-                    </td>
-                    <td className=" py-2 px-2 flex items-center pt-6">
+                    <td className="px-1 py-2 font-bold">{item.brand?.title}</td>
+                    <td className=" py-2  flex items-center pt-6 pl-[20%]">
                       <ButtonEditProduct item={item} className="pl-5 " />
                       <select
                         onChange={(e: any) =>

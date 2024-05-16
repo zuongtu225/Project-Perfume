@@ -9,6 +9,7 @@ import EditProductForm from "./FormEdit/EditProductForm";
 import {
   IBrand,
   ICategory,
+  INewProductSize,
   IProduct,
   IRole,
   ISize,
@@ -22,7 +23,6 @@ import {
   getApiRoles,
   getApiSizes,
 } from "../../../../store/action";
-import { updateProduct } from "../../../../Api";
 import { toast } from "react-toastify";
 import EditBrandForm from "./FormEdit/EditBrandForm";
 import { updateBrand } from "../../../../Api/brands";
@@ -32,6 +32,7 @@ import { updateRole } from "../../../../Api/role";
 import EditRoleForm from "./FormEdit/EditRoleForm";
 import EditCapacityForm from "./FormEdit/EditCapacityForm";
 import { updateSize } from "../../../../Api/capacity";
+import { updateProduct } from "../../../../Api";
 export function EditModal(props: any) {
   const dispatch = useDispatch<AppDispatch>();
   const [open, setOpen] = useState(props.open);
@@ -40,7 +41,7 @@ export function EditModal(props: any) {
   const [categoryUpdate, setCategoryUpdate] = useState<ICategory>();
   const [roleUpdate, setRoleUpdate] = useState<IRole>();
   const [sizeUpdate, setSizeUpdate] = useState<ISize>();
-
+  const [isErrorStock, setError] = useState<boolean>(false);
   useEffect(() => {
     setOpen(props.open);
   }, [props.open]);
@@ -50,14 +51,19 @@ export function EditModal(props: any) {
       props.handleClose(false);
     }
   };
+  const handleGetData = (dataUpdate: any, isErrorStock: boolean) => {
+    setProductUpdate(dataUpdate);
+    setBrandUpdate(dataUpdate);
+    setCategoryUpdate(dataUpdate);
+    setRoleUpdate(dataUpdate);
+    setSizeUpdate(dataUpdate);
+    setError(isErrorStock);
+  };
 
   const handleUpdate = async () => {
     switch (props.title) {
       case "PRODUCTS":
-        if (Number(productUpdate?.price) < 0) {
-          props.handleClose(false);
-          toast.error("Gía không được nhỏ hơn 0");
-        } else {
+        if (isErrorStock === false) {
           const responseProduct: any = await updateProduct(productUpdate);
           if (responseProduct?.data?.success === true) {
             toast.success(responseProduct.data.message);
@@ -124,14 +130,6 @@ export function EditModal(props: any) {
         }
         break;
     }
-  };
-
-  const handleGetData = (dataUpdate: any, sizeValue: any) => {
-    setProductUpdate(dataUpdate);
-    setBrandUpdate(dataUpdate);
-    setCategoryUpdate(dataUpdate);
-    setRoleUpdate(dataUpdate);
-    setSizeUpdate(dataUpdate);
   };
 
   return (

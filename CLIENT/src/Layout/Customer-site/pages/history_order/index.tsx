@@ -120,7 +120,7 @@ const HistoryOrders = () => {
                       {item.status === "Pending" ? (
                         <button
                           onClick={() => updateOrder(item.id)}
-                          className="w-30 bg-red-500 text-red-100 px-5 py-2 font-semibol m-2"
+                          className="w-30 bg-red-500 text-red-100 px-4 py-2 font-semibol"
                         >
                           Hủy đơn
                         </button>

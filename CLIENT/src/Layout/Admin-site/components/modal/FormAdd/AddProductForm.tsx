@@ -43,10 +43,10 @@ const ProductFormAdd = (props: any) => {
     setlistSize((currentValue) => {
       if (isSelected) {
         // Nếu size đã được chọn, loại bỏ nó khỏi danh sách
-        // xoá size thì xoá lun sizeStock
         setListSizeStocks((list) =>
           list.filter((item) => item.sizeId !== sizeId)
         );
+        // xoá size thì xoá lun sizeStock
         return currentValue.filter((id) => id !== sizeId);
       } else {
         return [...currentValue, sizeId];
