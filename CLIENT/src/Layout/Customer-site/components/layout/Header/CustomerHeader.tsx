@@ -145,6 +145,7 @@ const CustomerHeader = () => {
                 dataSearch?.map((item: IProduct) => {
                   return (
                     <div
+                      key={item?.id}
                       className="item-search"
                       onClick={() => productDetail(item?.id)}
                     >
