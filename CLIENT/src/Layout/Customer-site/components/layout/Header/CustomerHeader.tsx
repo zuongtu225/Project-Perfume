@@ -170,7 +170,7 @@ const CustomerHeader = () => {
             <div id="loginAccount " className="w-100px">
               {auth !== "" ? (
                 <div className="flex gap-3 items-center">
-                  {userDetail.avatar !== "" && (
+                  {userDetail?.avatar !== "" && (
                     <img
                       onClick={profile}
                       style={{
