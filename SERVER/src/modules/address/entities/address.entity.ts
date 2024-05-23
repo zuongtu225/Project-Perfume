@@ -23,6 +23,7 @@ export class Address {
   @Exclude()
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createAt: Date;
+
   @Exclude()
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updateAt: Date;
