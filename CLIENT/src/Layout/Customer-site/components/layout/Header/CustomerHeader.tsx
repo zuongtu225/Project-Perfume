@@ -204,7 +204,10 @@ const CustomerHeader = () => {
           <div className="cart mr-5">
             <p className="hide-mobile hide-tablet">|</p>
             <div className="nationwide-store hide-mobile  hide-tablet"></div>
-            <LuStore className=" hide-mobile" />
+            <LuStore
+              onClick={() => navigate("/contact")}
+              className=" hide-mobile"
+            />
             <RiShoppingCart2Line className="w-8 h-6" onClick={cartPage} />
             {userDetail?.id && <p id="length-cart">{carts?.length}</p>}
           </div>
