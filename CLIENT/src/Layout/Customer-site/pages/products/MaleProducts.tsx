@@ -86,8 +86,8 @@ const MaleProducts = () => {
                     <div className="product">
                       <div className="buy-now-container">
                         <img
-                          onClick={() => productDetail(item.id)}
-                          src={`${item.images[0].url}`}
+                          onClick={() => productDetail(item?.id)}
+                          src={`${item?.images[0]?.url}`}
                           alt=""
                         />
                         <button>MUA NGAY</button>
