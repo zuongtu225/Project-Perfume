@@ -146,12 +146,14 @@ const CustomerHeader = () => {
                   return (
                     <div
                       className="item-search"
-                      onClick={() => productDetail(item.id)}
+                      onClick={() => productDetail(item?.id)}
                     >
-                      <img src={`${item.images[0].url}`} alt="" />
+                      <img src={`${item?.images[0]?.url}`} alt="" />
                       <div className="item-search-name">
-                        <p id="name-search">{item.title}</p>
-                        <p id="price-search">{item.price.toLocaleString()} đ</p>
+                        <p id="name-search">{item?.title}</p>
+                        <p id="price-search">
+                          {item?.price?.toLocaleString()} đ
+                        </p>
                       </div>
                     </div>
                   );
