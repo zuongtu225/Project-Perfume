@@ -32,7 +32,7 @@ const ProductsDetail = () => {
   );
   const productId = Number(id);
   const newProductSize = productSizes?.filter(
-    (item: any): any => item.productId.id === productId
+    (item: any): any => item?.productId?.id === productId
   );
 
   const addToCart = async () => {
@@ -42,7 +42,7 @@ const ProductsDetail = () => {
     if (quantity < 1) {
       return toast.error("Số lượng sản phẩm không thể nhỏ hơn 1");
     }
-    if (+quantity > productDetail?.stock) {
+    if (+quantity > productSize?.stock) {
       return toast.error("Số lượng trong kho không đủ");
     }
     const isExistCart = carts?.find(
@@ -101,8 +101,7 @@ const ProductsDetail = () => {
     setProductSize(productSizes?.find((item: any) => item.id === sizeId));
     setPrice(
       Math.floor(
-        priceByPercent.productId.price +
-          +priceByPercent.sizeId.percent * priceByPercent.productId.price
+        priceByPercent.productId.price * (1 + +priceByPercent.sizeId.percent)
       )
     );
   };
@@ -238,7 +237,7 @@ const ProductsDetail = () => {
                             : "bg-white"
                         }`}
                       >
-                        {item.sizeId.size}
+                        {item?.sizeId?.size}
                       </span>
                     </button>
                   );
