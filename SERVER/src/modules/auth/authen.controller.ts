@@ -46,8 +46,6 @@ export class AuthenController {
       const resss = res.redirect(
         `http://localhost:3000/verifyGoogle/${token}/v1`,
       );
-      console.log(resss);
-
       return resss;
     }
   }

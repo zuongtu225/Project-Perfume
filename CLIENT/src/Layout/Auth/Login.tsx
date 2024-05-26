@@ -16,7 +16,6 @@ const Login = () => {
   const [isBlock, setIsBlock] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  console.log("Trước khi khởi tạo");
 
   const pro = new Promise((resolve, reject) => {
     const a = 1;
@@ -26,10 +25,6 @@ const Login = () => {
       reject(error);
     }
   });
-
-  console.log(
-    pro.then((data) => console.log(data)).catch((e) => console.log(e))
-  );
 
   const login = async (e: any) => {
     e.preventDefault();
