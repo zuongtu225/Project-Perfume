@@ -34,6 +34,7 @@ const ProductsDetail = () => {
   const newProductSize = productSizes?.filter(
     (item: any): any => item.productId.id === productId
   );
+
   const addToCart = async () => {
     if (productSize === undefined) {
       return toast.error("Vui lòng chọn size");
@@ -270,7 +271,7 @@ const ProductsDetail = () => {
               <p>Tiết kiệm: 10%</p>
               <p>CÒN HÀNG</p>
               <div className="store-near">
-                <p>Số lượng kho: {productDetail?.stock}</p>
+                <p>Số lượng kho: {productSize?.stock}</p>
               </div>
               <div className="quantity">
                 <p>Số lượng:</p>
