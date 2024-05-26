@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { IOrder, IidCommon } from './interface/order.interface';
 import { Order } from './entities/order.entity';
-import { ISearch } from '../user/interface/user.interface';
 @Injectable()
 export class OrderRepository {
   constructor(

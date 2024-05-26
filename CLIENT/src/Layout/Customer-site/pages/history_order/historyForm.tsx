@@ -6,8 +6,7 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../../../store";
+import { useSelector } from "react-redux";
 
 export function HistoryModal(props: any) {
   const orderDetail = useSelector(
@@ -54,9 +53,9 @@ export function HistoryModal(props: any) {
               </tr>
             </thead>
             <tbody>
-              {orderDetail?.orderItems?.map((item: any, index: number) => {
+              {orderDetail?.orderItems?.map((item: any) => {
                 return (
-                  <tr key={index} className="p-10 zitems-center">
+                  <tr key={item?.id} className="p-10 zitems-center">
                     <td
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -77,7 +76,7 @@ export function HistoryModal(props: any) {
                       {item.productSizeId?.productId?.brand?.title}
                     </td>
                     <td className="px-6 py-4">
-                      {item.productSizeId?.productId?.stock}
+                      {orderDetail?.orderItems?.length}
                     </td>
                     <td className="px-6 py-4">
                       {item.productSizeId?.productId?.price?.toLocaleString()} ₫

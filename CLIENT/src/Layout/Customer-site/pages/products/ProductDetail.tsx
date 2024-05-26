@@ -24,6 +24,7 @@ const ProductsDetail = () => {
   const userDetail = useSelector(
     (state: any) => state?.userReducer?.userDetail
   );
+
   const productDetail = useSelector(
     (state: any) => state?.productReducer?.productDetail
   );

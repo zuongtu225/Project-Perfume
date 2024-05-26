@@ -114,20 +114,20 @@ const HistoryOrders = () => {
                       {item.status === "Cancel" && <p>Đơn hàng đã huỷ</p>}
                     </td>
                     <td className="px-6 py-4 w-[150px]">
-                      {item?.total.toLocaleString()} ₫
+                      {item?.total?.toLocaleString()} ₫
                     </td>
-                    <td className="px-10 py- 4">
+                    <td>
                       {item.status === "Pending" ? (
                         <button
                           onClick={() => updateOrder(item.id)}
-                          className="w-30 bg-red-500 text-red-100 px-4 py-2 font-semibol"
+                          className="w-30 bg-red-500 text-[12px] text-red-100 px-4 py-2 font-semibol"
                         >
                           Hủy đơn
                         </button>
                       ) : (
                         <button
                           onClick={() => handleDetail(item.id)}
-                          className="w-30 bg-green-500 text-red-100 px-4 py-2 font-semibol m-2"
+                          className="w-30 bg-green-500 text-[12px] text-red-100 px-4 py-2 font-semibol"
                         >
                           Chi tiết
                         </button>
