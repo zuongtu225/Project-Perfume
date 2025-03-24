@@ -157,7 +157,8 @@ const ProductFormAdd = (props: any) => {
             <div className="relative ">
               <label>Dung tích:</label>
               {sizes?.map((item: ISize) => {
-                const size = item.size.slice(14);
+                const size = item.size;
+                console.log(size);
                 return (
                   <div key={item.id} className=" flex items-center">
                     <label className="block">{size}</label>

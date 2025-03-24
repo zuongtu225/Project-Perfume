@@ -33,6 +33,7 @@ export class AuthenController {
   async login(@Body() body: LoginDto): Promise<IResponseAuth> {
     return await this.authenService.loginService(body);
   }
+
   @Get('/google')
   @UseGuards(AuthGuard('google'))
   async googleAuth(@Req() req) {}

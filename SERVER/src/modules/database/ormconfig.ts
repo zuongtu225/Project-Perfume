@@ -2,14 +2,6 @@ import { Module, OnModuleInit } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import { Connection } from 'typeorm';
-import { UserModule } from '../user/user.module';
-import { RoleModule } from '../role/role.module';
-import { AuthenModule } from 'src/modules/auth/authen.module';
-import { BrandModule } from '../brand/brand.module';
-import { CategoryModule } from '../category/category.module';
-import { ProductModule } from '../product/product.module';
-import { ImageModule } from '../images/image.module';
-import { SizeModule } from '../size/size.module';
 dotenv.config();
 
 @Module({

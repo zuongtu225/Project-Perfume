@@ -13,7 +13,8 @@ async function bootstrap() {
     allowedHeaders: ['Authorization', 'Content-Type'],
     credentials: true,
     optionsSuccessStatus: 200,
-  }); // <- enable CORS
+  });
+  // <- enable CORS
   await app.listen(process.env.PORT);
   if (module.hot) {
     module.hot.accept();

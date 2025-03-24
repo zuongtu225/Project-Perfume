@@ -34,7 +34,7 @@ import { SocketGateway } from './socket';
     AddressModule,
     PaymentModule,
     GoogleStrategyModule,
-    SocketGateway,
   ],
+  providers: [SocketGateway],
 })
 export class AppModule {}

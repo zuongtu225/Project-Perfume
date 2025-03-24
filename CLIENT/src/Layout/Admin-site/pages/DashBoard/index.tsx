@@ -2,8 +2,8 @@ const DashBoard = () => {
   return (
     <div>
       <img
-        className="w-full h-full object-cover "
-        src="https://a1digihub.com/wp-content/uploads/2021/01/Dashboard-doanh-so%CC%82%CC%81-ba%CC%81n-ha%CC%80ng.gif"
+        className="w-full h-full object-cover"
+        src="https://infograpia.com/cdn/shop/products/dashboard-slides-powerpoint-keynote-google-slides-preview-2.jpg?v=1624639506"
         alt=""
       />
     </div>

@@ -7,10 +7,12 @@ import { BsCartPlus } from "react-icons/bs";
 import { GoArrowRight } from "react-icons/go";
 import { Carousel } from "@material-tailwind/react";
 import { IProduct } from "../../../../Interface";
+import { createRole } from "../../../../Api/role";
 
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
   const auth: any = localStorage.getItem("auth") || "";
+
   const userDetail: any = useSelector(
     (state: any) => state?.userReducer?.userDetail
   );
@@ -239,7 +241,7 @@ const Home = () => {
           <div className="item-blog cursor-pointer">
             <div className="blog-img">
               <img
-                src="https://i.ytimg.com/vi/W_DViGTuNPE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAhSFaoE8NJ6lzNCX_G8QN5-0o0wQ"
+                src="https://cleopatraperfume.vn/wp-content/uploads/2022/10/Anh-chup-Man-hinh-2022-10-26-luc-16.38.07.png"
                 alt=""
               />
             </div>
@@ -257,7 +259,7 @@ const Home = () => {
           <div className="item-blog cursor-pointer">
             <div className="blog-img">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxDRBZmUaQP9lkm7uEru-B6oaRlhwc25ETNg&usqp=CAU"
+                src="https://activecarestore.co.uk/cdn/shop/articles/blog_1.jpg?v=1574317621"
                 alt=""
               />
             </div>
