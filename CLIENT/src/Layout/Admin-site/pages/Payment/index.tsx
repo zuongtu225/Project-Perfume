@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AdminHeader from "../../components/layout/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import {
-  getApiBrands,
-  getApiRoles,
-  getDetailRole,
-} from "../../../../store/action";
-import { IRole } from "../../../../Interface";
+import { getDetailPayment, getPayments } from "../../../../store/action";
+import { IPayment, IRole } from "../../../../Interface";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { EditModal } from "../../components/modal/EditModal";
 import { Button } from "flowbite-react";
 import { deleteRole } from "../../../../Api/role";
 import Pagination from "../../components/pagination";
+import { deletePayment } from "../../../../Api/payment";
 
-const RolesManager = () => {
+const PaymentManager = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const roles = useSelector((state: any) => state?.roleReducer?.roles);
-  const [data, setData] = useState<IRole[]>();
+  const payments = useSelector((state: any) => state?.paymentReducer?.payments);
+  const [data, setData] = useState<IPayment[]>();
   const [open, setOpen] = useState<boolean>(false);
 
   const handlePage = (pagination: any) => {
@@ -27,11 +24,12 @@ const RolesManager = () => {
     setOpen(open);
   };
   const handleEdit = async (id: number) => {
-    await dispatch(getDetailRole(id));
+    await dispatch(getDetailPayment(id));
     setOpen(!open);
   };
-  const removeRole = async (id: number) => {
-    const response = await deleteRole(id);
+
+  const removePayment = async (id: number) => {
+    const response = await deletePayment(id);
     if (response) {
       toast.success("Xóa thành công", {
         position: "top-center",
@@ -45,7 +43,7 @@ const RolesManager = () => {
         transition: Bounce,
       });
       setTimeout(() => {
-        dispatch(getApiRoles());
+        dispatch(getPayments(null));
       }, 1000);
     } else {
       toast.error("Phải xóa các user đã tạo bởi Thương Hiệu này trước");
@@ -53,14 +51,12 @@ const RolesManager = () => {
   };
 
   useEffect(() => {
-    dispatch(getApiRoles());
-    dispatch(getApiBrands(null));
+    dispatch(getPayments(null));
   }, []);
 
   return (
     <div>
-      <AdminHeader title="ROLES" slug="ROLES" />
-      <ToastContainer />
+      <AdminHeader title="PAYMENT" slug="PAYMENT" />
       <div className="content ">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
           <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
@@ -70,10 +66,7 @@ const RolesManager = () => {
                   STT
                 </th>
                 <th scope="col" className="px-20 py-3">
-                  Level
-                </th>
-                <th scope="col" className="px-20 py-3">
-                  Vai trò
+                  Phương Thức Thanh Toán
                 </th>
                 <th scope="col" className="px-1 py-3">
                   HÀNH ĐỘNG
@@ -81,7 +74,7 @@ const RolesManager = () => {
               </tr>
             </thead>
             <tbody>
-              {roles?.map((item: IRole, index: number) => {
+              {data?.map((item: IPayment, index: number) => {
                 return (
                   <tr className="p-10">
                     <td
@@ -90,13 +83,10 @@ const RolesManager = () => {
                     >
                       {index + 1}
                     </td>
-                    <td className="px-20 py-3">{item.role}</td>
-                    <td className="px-20 py-3">
-                      {item.role == 1 ? "Admin" : "Người dùng"}
-                    </td>
-                    <td className="align-baseline flex  pl-[200px]  py-3 ">
+                    <td className="px-20 py-3">{item.title}</td>
+                    <td className="align-baseline flex  pl-[290px]  py-3 ">
                       <EditModal
-                        title={"ROLES"}
+                        title={"PAYMENT"}
                         open={open}
                         handleClose={handleClose}
                       />
@@ -107,7 +97,7 @@ const RolesManager = () => {
                         Sửa
                       </Button>
                       <Button
-                        onClick={() => removeRole(item.id)}
+                        onClick={() => removePayment(item.id)}
                         className="bg-red-600 text-red-200 font-semibol"
                       >
                         Xoá
@@ -118,7 +108,7 @@ const RolesManager = () => {
               })}
             </tbody>
           </table>
-          <Pagination data={data} handlePage={handlePage} />
+          <Pagination data={payments} handlePage={handlePage} />
         </div>
       </div>
       <ToastContainer
@@ -138,4 +128,4 @@ const RolesManager = () => {
   );
 };
 
-export default RolesManager;
+export default PaymentManager;

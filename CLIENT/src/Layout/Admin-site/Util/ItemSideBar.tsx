@@ -5,6 +5,7 @@ import {
   PiSignatureBold,
   PiWalletBold,
 } from "react-icons/pi";
+import { MdOutlinePayments } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
 import { SlLogout } from "react-icons/sl";
 import { FaUsers } from "react-icons/fa6";
@@ -39,6 +40,12 @@ export const MenuItem = [
   { id: 7, path: "/admin/order", title: "Đơn hàng", icon: <PiScrollBold /> },
   {
     id: 8,
+    path: "/admin/payment",
+    title: "Payment",
+    icon: <MdOutlinePayments />,
+  },
+  {
+    id: 9,
     path: "/auth/login",
     title: "Đăng Xuất",
     icon: <SlLogout />,

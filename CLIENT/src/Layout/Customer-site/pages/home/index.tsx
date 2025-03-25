@@ -56,13 +56,13 @@ const Home = () => {
         )}
       >
         <img
-          src="https://theme.hstatic.net/1000340570/1000964732/14/slideshow_2.jpg?v=3894"
-          alt="image1"
+          src="https://piger.vn/wp-content/uploads/2023/04/bn1-1.jpg "
+          alt="image2"
           className="h-[530px] w-full object-cover"
         />
         <img
-          src="https://piger.vn/wp-content/uploads/2023/04/bn1-1.jpg "
-          alt="image2"
+          src="https://theme.hstatic.net/1000340570/1000964732/14/slideshow_2.jpg?v=3894"
+          alt="image1"
           className="h-[530px] w-full object-cover"
         />
         <img
@@ -128,7 +128,7 @@ const Home = () => {
       <div className="home-banner-block container m-3 ">
         <div className="block-man home-block relative">
           <img
-            src="https://theme.hstatic.net/1000340570/1000964732/14/banner-nu-desk.jpg?v=3894"
+            src="https://nuochoamc.com/upload/images/san-pham/2873/yves-saint-laurent-capeline-edp3.webp"
             alt=""
           />
           <NavLink className="absolute right-8 text-white " to={"/male"}>
@@ -139,7 +139,7 @@ const Home = () => {
         </div>
         <div className="block-woman home-block relative">
           <img
-            src="https://theme.hstatic.net/1000340570/1000964732/14/banner-nam-desk.jpg?v=3894"
+            src="https://i0.wp.com/dalybeauty.ca/wp-content/uploads/2018/05/Screen-Shot-2018-05-16-at-5.27.34-PM.png"
             alt=""
           />
           <NavLink className="absolute right-8 text-white " to={"/female"}>
@@ -150,7 +150,7 @@ const Home = () => {
         </div>
         <div className="block-niche home-block relative ">
           <img
-            src="https://theme.hstatic.net/1000340570/1000964732/14/banner-niche-desk.jpg?v=3894"
+            src="https://cdn.riah.ae/storage/upload/images/2023/08/11/64d6a10e18c4b.jpg"
             alt=""
           />
           <NavLink className="absolute  text-white   " to={"/male"}>

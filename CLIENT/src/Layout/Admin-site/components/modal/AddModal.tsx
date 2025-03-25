@@ -10,6 +10,7 @@ import { createProduct, createProductSize } from "../../../../Api";
 import { createImages } from "../../../../Api/images";
 import {
   IBrand,
+  IPayment,
   IProduct,
   IProductSize,
   IRole,
@@ -26,6 +27,7 @@ import {
   getApiProducts,
   getApiRoles,
   getApiSizes,
+  getPayments,
 } from "../../../../store/action";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { createCategory } from "../../../../Api/categories";
@@ -36,6 +38,8 @@ import AddRoleForm from "./FormAdd/AddRoleForm";
 import { createRole } from "../../../../Api/role";
 import AddCapacityForm from "./FormAdd/AddCapacityForm";
 import { createSizes } from "../../../../Api/capacity";
+import AddPaymentForm from "./FormAdd/AddPaymentForm";
+import { createPayment } from "../../../../Api/payment";
 
 export function AddModal(props: any): any {
   const dispatch = useDispatch<AppDispatch>();
@@ -47,6 +51,7 @@ export function AddModal(props: any): any {
   const [open, setOpen] = useState(props.open);
   const [role, setRole] = useState<any>();
   const [size, setSize] = useState<any>();
+  const [payment, setPayment] = useState<any>();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
 
   const ClickClose = (e: any) => {
@@ -74,6 +79,9 @@ export function AddModal(props: any): any {
   };
   const handleGetSize = (data: ISize) => {
     setSize({ size: data.size, percent: +data.percent });
+  };
+  const handleGetPayment = (data: IPayment) => {
+    setPayment({ title: data });
   };
 
   const handleAdd = async () => {
@@ -212,6 +220,29 @@ export function AddModal(props: any): any {
           toast.error("Dung tích đã tồn tại");
         }
         break;
+      case "PAYMENT":
+        const responsePayment: any = await createPayment(payment);
+        if (responsePayment?.data?.success === true) {
+          props.handleClose(false);
+          toast.success(responsePayment?.data.message, {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          });
+          setTimeout(() => {
+            dispatch(getPayments(null));
+          }, 1000);
+        } else {
+          props.handleClose(false);
+          toast.error("Phương Thức đã tồn tại");
+        }
+        break;
     }
   };
 
@@ -245,6 +276,11 @@ export function AddModal(props: any): any {
           {props.title === "ROLES" && (
             <div>
               <AddRoleForm handleGetRole={handleGetRole} />
+            </div>
+          )}
+          {props.title === "PAYMENT" && (
+            <div>
+              <AddPaymentForm handleGetPayment={handleGetPayment} />
             </div>
           )}
           {props.title === "CAPACITY" && (

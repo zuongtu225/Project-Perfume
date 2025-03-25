@@ -82,7 +82,7 @@ const Checkout = () => {
     const resOrder: any = await createOrder(newOrder);
     if (resOrder?.data?.success === true) {
       const newOrderItems = carts.map((item: any) => ({
-        codeOrder: resOrder.data.data.codeOrder,
+        codeOrder: resOrder?.data?.data.codeOrder,
         quantity: item.quantity,
         productSizeId: item.productSizeId,
         userId: item.userId,
@@ -97,17 +97,17 @@ const Checkout = () => {
       if (orderItem?.data?.success === true) {
         socket.emit("renderStockProduct", "");
         await updateStock(productIds, quantities);
-        toast.success(resOrder.data.message);
+        toast.success(resOrder?.data?.message);
         await deleteCart();
         await dispatch(getCartByUser());
         setTimeout(() => {
           navigate("/");
         }, 1500);
       } else {
-        toast.error(orderItem.data.message);
+        toast.error(orderItem?.data?.message);
       }
     } else {
-      toast.error(resOrder.data.message);
+      toast.error(resOrder?.data?.message);
     }
   };
 

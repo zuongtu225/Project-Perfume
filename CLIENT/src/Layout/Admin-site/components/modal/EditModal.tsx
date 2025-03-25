@@ -22,6 +22,7 @@ import {
   getApiProducts,
   getApiRoles,
   getApiSizes,
+  getPayments,
 } from "../../../../store/action";
 import { toast } from "react-toastify";
 import EditBrandForm from "./FormEdit/EditBrandForm";
@@ -33,6 +34,9 @@ import EditRoleForm from "./FormEdit/EditRoleForm";
 import EditCapacityForm from "./FormEdit/EditCapacityForm";
 import { updateSize } from "../../../../Api/capacity";
 import { updateProduct } from "../../../../Api";
+import EditPaymentForm from "./FormEdit/EditPaymentForm";
+import { updatePayment } from "../../../../Api/payment";
+
 export function EditModal(props: any) {
   const dispatch = useDispatch<AppDispatch>();
   const [open, setOpen] = useState(props.open);
@@ -41,7 +45,9 @@ export function EditModal(props: any) {
   const [categoryUpdate, setCategoryUpdate] = useState<ICategory>();
   const [roleUpdate, setRoleUpdate] = useState<IRole>();
   const [sizeUpdate, setSizeUpdate] = useState<ISize>();
+  const [paymentUpdate, setPaymentUpdate] = useState<ISize>();
   const [isErrorStock, setError] = useState<boolean>(false);
+
   useEffect(() => {
     setOpen(props.open);
   }, [props.open]);
@@ -58,6 +64,7 @@ export function EditModal(props: any) {
     setRoleUpdate(dataUpdate);
     setSizeUpdate(dataUpdate);
     setError(isErrorStock);
+    setPaymentUpdate(dataUpdate);
   };
 
   const handleUpdate = async () => {
@@ -100,7 +107,7 @@ export function EditModal(props: any) {
           }, 2000);
         } else {
           props.handleClose(false);
-          toast.error("Loại đã được tạo vui lòng nhập tên khác");
+          toast.error("Loại sai hoặc đã tồn tại ");
         }
         break;
       case "ROLES":
@@ -113,7 +120,7 @@ export function EditModal(props: any) {
           }, 2000);
         } else {
           props.handleClose(false);
-          toast.error("LEVEL đã được tạo vui lòng nhập LEVEL khác");
+          toast.error("LEVEL sai hoặc đã tồn tại");
         }
         break;
       case "CAPACITY":
@@ -126,7 +133,20 @@ export function EditModal(props: any) {
           }, 2000);
         } else {
           props.handleClose(false);
-          toast.error("Dung tích đã được tạo vui lòng nhập dung tích khác");
+          toast.error("Dung tích sai hoặc đã tồn tại");
+        }
+        break;
+      case "PAYMENT":
+        const responsePayment: any = await updatePayment(paymentUpdate);
+        if (responsePayment?.data?.success === true) {
+          toast.success(responsePayment?.data?.message);
+          props.handleClose(false);
+          setTimeout(() => {
+            dispatch(getPayments(null));
+          }, 2000);
+        } else {
+          props.handleClose(false);
+          toast.error("Phương Thức sai hoặc đã tồn tại");
         }
         break;
     }
@@ -159,6 +179,11 @@ export function EditModal(props: any) {
           {props.title === "CAPACITY" && (
             <div>
               <EditCapacityForm handleGetData={handleGetData} />
+            </div>
+          )}
+          {props.title === "PAYMENT" && (
+            <div>
+              <EditPaymentForm handleGetData={handleGetData} />
             </div>
           )}
         </DialogBody>

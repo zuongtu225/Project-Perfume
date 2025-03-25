@@ -22,6 +22,7 @@ import { Contact } from "./Layout/Customer-site/pages/contact";
 import Checkout from "./Layout/Customer-site/pages/checkout";
 import RolesManager from "./Layout/Admin-site/pages/Roles";
 import CapacityManager from "./Layout/Admin-site/pages/Capacity";
+import PaymentManager from "./Layout/Admin-site/pages/Payment";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="brand" element={<BrandsManager />}></Route>
         <Route path="role" element={<RolesManager />}></Route>
         <Route path="capacity" element={<CapacityManager />}></Route>
+        <Route path="payment" element={<PaymentManager />}></Route>
       </Route>
       <Route path="*" element={<PageNotFound />}></Route>
     </Routes>
